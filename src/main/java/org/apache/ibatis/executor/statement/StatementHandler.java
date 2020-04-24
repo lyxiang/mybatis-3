@@ -26,6 +26,9 @@ import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.session.ResultHandler;
 
 /**
+ *
+ * 负责处理JDBC的Statement的交互，包括对Statement设置参数，以及将JDBC返回的resultSet结果转化成List
+ *
  * @author Clinton Begin
  */
 public interface StatementHandler {

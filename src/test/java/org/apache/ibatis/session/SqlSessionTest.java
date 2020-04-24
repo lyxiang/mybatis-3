@@ -53,6 +53,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -79,6 +80,23 @@ class SqlSessionTest extends BaseDataTest {
             sqlSession = sqlMapper.openSession();
             System.out.println("开启sqlSession");
             sqlSession.commit();
+        } finally {
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+    }
+
+    @Test
+    public void userMapperProxy() {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = sqlMapper.openSession();
+            AuthorMapper mapper = sqlSession.getMapper(AuthorMapper.class);
+            List<Author> authors = mapper.selectAllAuthors();
+            Assert.assertTrue(authors.size() > 0);
+        } catch (Exception e){
+            e.printStackTrace();
         } finally {
             if (sqlSession != null) {
                 sqlSession.close();

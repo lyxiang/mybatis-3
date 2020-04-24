@@ -29,6 +29,8 @@ import org.apache.ibatis.transaction.Transaction;
 
 /**
  * @author Clinton Begin
+ * Mybatis执行器，是Mybatis的核心。
+ * 负责Sql语句的动态生成和查询缓存的维护
  */
 public interface Executor {
 
